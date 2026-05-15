@@ -577,6 +577,7 @@ func ReplaceAllCommasOutsideQuotesWithNewLines(s string) string {
 
 	inQuotes := false
 	bracketDepth := 0
+	brackDepth := 0
 
 	for i := 0; i < len(s); i++ {
 		ch := s[i]
@@ -601,7 +602,15 @@ func ReplaceAllCommasOutsideQuotesWithNewLines(s string) string {
 			bracketDepth--
 
 			result.WriteByte(ch)
-		case ch == ',' && !inQuotes && bracketDepth == 0:
+		case ch == '{' && !inQuotes:
+			brackDepth++
+
+			result.WriteByte(ch)
+		case ch == '}' && !inQuotes:
+			brackDepth--
+
+			result.WriteByte(ch)
+		case ch == ',' && !inQuotes && bracketDepth == 0 && brackDepth == 0:
 			result.WriteByte('\n')
 
 		default:
