@@ -66,6 +66,8 @@ const (
 	// OptOutAuth gates flags that opt out of running --auth-provider-cmd in
 	// specific phases (currently --no-discovery-auth-provider-cmd).
 	OptOutAuth = "opt-out-auth"
+	// OptionalHooks gates flags that make Terragrunt hooks optional during runs.
+	OptionalHooks = "optional-hooks"
 )
 
 const (
@@ -141,6 +143,9 @@ func NewExperiments() Experiments {
 		},
 		{
 			Name: OptOutAuth,
+		},
+		{
+			Name: OptionalHooks,
 		},
 	}
 }

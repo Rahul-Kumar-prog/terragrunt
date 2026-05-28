@@ -92,6 +92,8 @@ const (
 	// the rewrite and routes the URL through the http getter for anonymous
 	// access.
 	LegacyGCSPublicPrefix = "legacy-gcs-public-prefix"
+
+	OptionalHooks = "optional-hooks"
 )
 
 // LegacyGCSDeprecationWarning is the warning text emitted when a plain
@@ -287,6 +289,10 @@ func New() strict.Controls {
 			Name:        LegacyGCSPublicPrefix,
 			Description: "Stops auto-prefixing plain `https://www.googleapis.com/storage/...` source URLs with `gcs::`. Pre-v1.0.5 Terragrunt routed those URLs through the credentialed gcs getter; v1.0.5+ routes them through the http getter for anonymous access. The legacy prefix-rewrite is restored by default with a deprecation warning. Enable this control to opt into the new behavior and silence the warning.",
 			Warning:     LegacyGCSDeprecationWarning,
+		},
+		&Control{
+			Name:        OptionalHooks,
+			Description: "Allows hooks to be optional by not throwing an error if a hook command is not found. This is useful for gradually migrating users to hooks, as they can enable this control to avoid errors until they have fully adopted hooks and no longer have any dependencies on the old behavior.",
 		},
 	}
 
