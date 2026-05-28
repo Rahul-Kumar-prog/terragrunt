@@ -292,7 +292,7 @@ func New() strict.Controls {
 		},
 		&Control{
 			Name:        OptionalHooks,
-			Description: "Allows hooks to be optional by not throwing an error if a hook command is not found. This is useful for gradually migrating users to hooks, as they can enable this control to avoid errors until they have fully adopted hooks and no longer have any dependencies on the old behavior.",
+			Description: "Allows users to pass --no-hooks to terragrunt run to skip execution of configured before_hook, after_hook, and error_hook blocks.",
 		},
 	}
 

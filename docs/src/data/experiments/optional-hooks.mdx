@@ -12,7 +12,7 @@ When enabled, users can pass `--no-hooks` to `terragrunt run` to skip configured
 terragrunt run --experiment optional-hooks --no-hooks -- plan
 ```
 
-This is useful when a run needs to bypass local automation temporarily, such as when testing a module without linting or setup hooks.
+This is useful when a run needs to bypass hook automation temporarily, such as when debugging faulty hooks or OpenTofu/Terraform modules.
 
 ### `optional-hooks` - Criteria for stabilization
 To transition the `optional-hooks` feature to a stable release, the following must be addressed:
