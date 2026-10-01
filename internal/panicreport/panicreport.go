@@ -2,6 +2,7 @@
 package panicreport
 
 import (
+	"slices"
 	stdErrors "errors"
 	"fmt"
 	"os"
@@ -286,13 +287,7 @@ func hasPanicStack(err error) bool {
 	}
 
 	if u, ok := err.(interface{ Unwrap() []error }); ok {
-		for _, e := range u.Unwrap() {
-			if hasPanicStack(e) {
-				return true
-			}
-		}
-
-		return false
+		return slices.ContainsFunc(u.Unwrap(), hasPanicStack)
 	}
 
 	return hasPanicStack(stdErrors.Unwrap(err))
